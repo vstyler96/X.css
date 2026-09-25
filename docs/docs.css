@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout: */
+
+.col-main {
+  flex: 1;
+}  
+
+.col-complementary {
+  flex: 1;
+}
+
+aside {
+  width: 200px;
+  position: sticky;
+  top: 18px;
+  bottom: 0;
+  display: flex;
+  align-items: stretch;
+  height: calc(100vh - 36px);
+}
+
+html {
+  min-height: 100vh;
+}
+
+code, pre {
+  font-family: Menlo, Monaco, Consolas, monospace;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+.heading {
+  font-size: 3rem;
+}
+
+.desc {
+  font-size: 1.3em;
+  color: var(--text-muted, #737373);
+}
+
+
+.center {
+  text-align: center;
+}
+
+.component {
+  display: flex;
+  margin-top: 24px;
+  font-size: 1em;
+}
+
+.alert-text,
+.dialog-text,
+.modal-text,
+.modeless-text {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.dialog-text {
+  margin-top: 20px;
+}
+
+.modal-text, .alert-text {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+p {
+  font-size: 1em;
+}
+
+
+blockquote {
+  margin: 0 0 20px;
+  padding: 20px;
+  width: 80%;
+  font-size: 13px;
+  color: #4d4d4d;
+  background: #fff;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+}
+
+blockquote footer {
+  margin: 12px 0 0 12px;
+}
+
+.example {
+  margin: 16px;
+  padding: 12px 24px;
+  border-left: 1px solid #c4c4c4;
+}
+
+summary {
+  font-size: 14px;
+  padding-top: 10px;
+  cursor: pointer;
+  margin: 12px 0 0 0;
+  width: 30%;
+}
+
+pre {
+  font-size: 13px;
+}
+
+.modal-dialog {
+  width: 50%;
+}
+
+.square {
+  width: 50px;
+  height: 50px;
+  flex: none;
+  background: linear-gradient(to bottom, #fff, #d9d9d9);
+  border: 1px solid #b6b6b6;
+  border-radius: 10px;
+}
+
+.menu-items {
+  padding: 0;
+  font-size: 14px;
+}
+
+/* responsive shiz */
+@media only screen and (min-width: 640px) {
+  .layout {
+    display: flex;
+    justify-content: space-between;
+  }
+  .standard-dialog {
+    margin-right: 20px;
+    margin-top: 18px;
+  }
+  .sidebar {
+    z-index: 1;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    display: none !important;
+  }
+  .example {
+    margin: 0px;
+  }
+  .component {
+    display: contents;
+  }
+  .scale-down {
+    transform: scale(0.8);
+  }
+}
