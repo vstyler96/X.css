@@ -1,0 +1,398 @@
+:root {
+  /* w = window, wct = window control (traffic light) */
+  --osx-w-bdr: 6px; /* Lion ref: 6.4 */
+  --osx-w-bd: #9b9b9b; /* Lion ref: #cbcbcb at the top edge -> #9b9b9b */
+  --osx-w-sd: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 22px 70px 4px rgba(0, 0, 0, 0.56), 0 0 0 1px var(--osx-w-bd);
+  --osx-w-sd-i: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--osx-w-bd); /* inactive */
+  --osx-title-grad: linear-gradient(to bottom, #f6f6f6, #d9d9d9);
+  --osx-title-grad-a: linear-gradient(to bottom, #e6e6e6, #b7b7b7); /* Lion ref */
+  --osx-wt-c: var(--osx-el-c-d);
+  --osx-wt-c-a: #303030; /* Lion ref */
+  --osx-wct-size: 12px;
+  --osx-wct-bg: #b5b5b5;
+  --osx-wct-close: #fd4e4e;
+  --osx-wct-close-a: #c72f2b;
+  --osx-wct-min: #f3bb55;
+  --osx-wct-min-a: #c7862c;
+  --osx-wct-max: #96d16f;
+  --osx-wct-max-a: #4a8e33;
+  --osx-wct-help: #a9b8cc;
+  --osx-wct-help-a: #6f84a3;
+  --osx-wct-glyphs: url("./icon/buttons-hover.png");
+  --osx-wct-gloss: linear-gradient(#fff, rgba(255, 255, 255, 0.9) 2%, #fff, rgba(255, 255, 255, 0.4) 16%, rgba(255, 255, 255, 0) 43%, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.7) 122%, rgba(255, 255, 255, 0.7));
+}
+
+/* A window is inactive by default; add .active (to .window or .title-bar)
+   for the focused look, as in 7.css. */
+.window {
+  font: var(--osx-font);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  overflow: hidden;
+  overflow: clip; /* hidden still lets anchor links scroll the window */
+  color: var(--osx-el-c);
+  background: var(--osx-surface);
+  border-radius: var(--osx-w-bdr);
+  box-shadow: var(--osx-w-sd-i);
+
+  &.active {
+    box-shadow: var(--osx-w-sd);
+  }
+
+  &-body {
+    flex: 1 1 auto;
+    overflow: auto;
+
+    &.has-space {
+      padding: 12px 16px;
+    }
+
+    pre {
+      margin: 0;
+    }
+  }
+
+  &.is-bright > .window-body {
+    background: #fff;
+  }
+
+  /* bottom bar (Finder/iTunes style), holds buttons and controls */
+  &-footer,
+  > footer {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 22px;
+    padding: 4px 8px;
+    background: linear-gradient(to bottom, #c9c9c9, #a7a7a7);
+    border-top: 1px solid #515151;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  fieldset {
+    margin-bottom: 9px;
+  }
+
+  /* Dialogs: hidden until targeted, as in 7.css */
+  &[role="dialog"] {
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    opacity: 0;
+    box-shadow: var(--osx-w-sd);
+    animation: osx-dialog-close 0.2s ease-in forwards;
+    transition: visibility 0s linear 0.2s;
+
+    &:target {
+      visibility: visible;
+      opacity: 1;
+      animation: osx-dialog-open 0.25s ease-out backwards;
+      transition: none;
+    }
+
+    /* Lion sheet: drops out of the top, flat top edge, rounded bottom */
+    &.is-sheet {
+      top: 0;
+      transform: translateX(-50%);
+      border-radius: 0 0 var(--osx-w-bdr) var(--osx-w-bdr);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.3);
+      animation-name: osx-sheet-close;
+
+      &:target {
+        animation-name: osx-sheet-open;
+      }
+    }
+  }
+}
+
+@keyframes osx-dialog-open {
+  from {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes osx-dialog-close {
+  from {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes osx-sheet-open {
+  from {
+    transform: translate(-50%, -100%);
+  }
+}
+
+@keyframes osx-sheet-close {
+  from {
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -100%);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.window[role="dialog"]) {
+    animation-duration: 0s !important;
+  }
+}
+
+.title-bar {
+  font: var(--osx-font);
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 22px;
+  padding: 0 7px;
+  box-sizing: border-box;
+  background: var(--osx-title-grad);
+  border-bottom: 1px solid #9a9a9a;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  /* centred over the whole bar, whatever sits on each side */
+  &-text {
+    position: absolute;
+    left: 70px;
+    right: 70px;
+    overflow: hidden;
+    line-height: 21px;
+    color: var(--osx-wt-c);
+    text-align: center;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 1px #e7e7e7;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* the buttons join the bar's flex row so `order` can place them Mac-style:
+     close, minimize, zoom on the left; help and full screen on the right */
+  &-controls {
+    display: contents;
+
+    button {
+      position: relative;
+      flex: none;
+      width: var(--osx-wct-size);
+      min-width: 0;
+      height: var(--osx-wct-size);
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      color: transparent;
+      background: var(--osx-wct-bg);
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 1px 4px rgba(0, 0, 0, 0.8);
+      animation: none;
+
+      /* glass highlight */
+      &::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 1px;
+        right: 1px;
+        bottom: 1px;
+        border-radius: 50%;
+        background: var(--osx-wct-gloss);
+      }
+
+      /* glyph, shown while hovering the bar */
+      &::before {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background: var(--osx-wct-glyphs) no-repeat;
+        opacity: 0;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+      }
+
+      &[aria-label="Close"],
+      &.is-close {
+        order: -4;
+
+        &::before {
+          content: "";
+          background-position: 1px 1px;
+        }
+      }
+
+      &[aria-label="Minimize"],
+      &.is-minimize {
+        order: -3;
+
+        &::before {
+          content: "";
+          background-position: -9px 1px;
+        }
+      }
+
+      &[aria-label="Maximize"],
+      &.is-maximize,
+      &[aria-label="Restore"],
+      &.is-restore {
+        order: -2;
+
+        &::before {
+          content: "";
+          background-position: -19px 1px;
+        }
+      }
+
+      &[aria-label="Help"],
+      &.is-help {
+        order: 1;
+        margin-left: auto;
+
+        &::before {
+          content: "?";
+          font: bold 9px/12px "Lucida Grande", Helvetica, sans-serif;
+          color: rgba(0, 0, 0, 0.6);
+          text-align: center;
+          background: none;
+        }
+      }
+
+      &[aria-label="Fullscreen"],
+      &.is-fullscreen {
+        order: 2;
+        width: 14px;
+        height: 14px;
+        margin-left: auto;
+        background: url("./icon/fullscreen.svg") center no-repeat;
+        border-radius: 0;
+        box-shadow: none;
+
+        &::before,
+        &::after {
+          content: none;
+        }
+
+        &:active {
+          opacity: 0.6;
+        }
+      }
+    }
+
+    :is([aria-label="Help"], .is-help) ~ :is([aria-label="Fullscreen"], .is-fullscreen) {
+      margin-left: 0;
+    }
+  }
+
+  /* Active title bar */
+  .window.active > &,
+  &.active {
+    background: var(--osx-title-grad-a);
+    border-bottom-color: #656565;
+
+    .title-bar-text {
+      color: var(--osx-wt-c-a);
+    }
+
+    .title-bar-controls button {
+      &:focus-visible::before {
+        opacity: 1;
+      }
+
+      &[aria-label="Close"],
+      &.is-close {
+        background-color: var(--osx-wct-close);
+
+        &:active {
+          background-color: var(--osx-wct-close-a);
+        }
+      }
+
+      &[aria-label="Minimize"],
+      &.is-minimize {
+        background-color: var(--osx-wct-min);
+
+        &:active {
+          background-color: var(--osx-wct-min-a);
+        }
+      }
+
+      &[aria-label="Maximize"],
+      &.is-maximize,
+      &[aria-label="Restore"],
+      &.is-restore {
+        background-color: var(--osx-wct-max);
+
+        &:active {
+          background-color: var(--osx-wct-max-a);
+        }
+      }
+
+      &[aria-label="Help"],
+      &.is-help {
+        background-color: var(--osx-wct-help);
+
+        &:active {
+          background-color: var(--osx-wct-help-a);
+        }
+      }
+
+      &:disabled {
+        background-color: var(--osx-wct-bg);
+      }
+    }
+
+    &:hover .title-bar-controls button::before {
+      opacity: 1;
+    }
+  }
+
+  /* unified title bar + toolbar */
+  &:has(+ .toolbar) {
+    border-bottom: none;
+  }
+}
+
+.status-bar {
+  flex: none;
+  display: flex;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--osx-el-c-m);
+  background: linear-gradient(to top, #d9d9d9, #ededed);
+  border-top: 1px solid #bfbfbf;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.51);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  &-field {
+    flex-grow: 1;
+    margin: 0;
+    padding: 3px 8px;
+    border-right: 1px solid #c4c4c4;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}

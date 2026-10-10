@@ -1,0 +1,78 @@
+:root {
+  --osx-tab-bg: #e4e4e4; /* Lion ref */
+  --osx-tab-bd: #c8c8c8; /* Lion ref: #c2c2c2 top, #dbdbdb bottom */
+}
+
+/* Lion tab view: a centred segmented control over a sunken panel */
+menu[role="tablist"] {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 -11px;
+  padding: 0;
+  list-style: none;
+
+  /* inactive tabs are glossy graphite, the selected tab is glossy aqua */
+  button {
+    min-width: 0;
+    margin: 0;
+    padding: 0 12px;
+    background: var(--osx-el-grad-g);
+    background-clip: padding-box;
+    border-radius: 0;
+    border-left-width: 0;
+    box-shadow: var(--osx-el-sd-a);
+    animation: none;
+
+    &:first-child {
+      border-left-width: 1px;
+      border-radius: var(--osx-el-bdr) 0 0 var(--osx-el-bdr);
+    }
+
+    &:last-child {
+      border-radius: 0 var(--osx-el-bdr) var(--osx-el-bdr) 0;
+    }
+
+    &:only-child {
+      border-radius: var(--osx-el-bdr);
+    }
+
+    &[aria-selected="true"] {
+      background: var(--osx-el-grad-a);
+      background-clip: padding-box;
+      border-color: var(--osx-el-bd-df);
+    }
+
+    &:disabled {
+      background: var(--osx-el-grad-d);
+    }
+
+    &:focus-visible {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  &.justified {
+    margin-right: 10px;
+    margin-left: 10px;
+
+    button {
+      flex-grow: 1;
+    }
+  }
+}
+
+[role="tabpanel"] {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 9px;
+  padding: 22px 14px 14px;
+  background: var(--osx-tab-bg);
+  border: 1px solid var(--osx-tab-bd);
+  border-top-color: #c2c2c2;
+  border-bottom-color: #dbdbdb;
+  border-radius: var(--osx-el-bdr);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(255, 255, 255, 0.5);
+}

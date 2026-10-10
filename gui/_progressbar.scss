@@ -1,0 +1,74 @@
+:root {
+  --osx-pg-h: 18px; /* Lion ref */
+  --osx-pg-track: linear-gradient(to bottom, #d2d2d2, #e6e5e5); /* Lion ref */
+  --osx-pg-bd: #9c9c9c; /* Lion ref: #959595 -> #a3a3a3 */
+  --osx-pg-gloss: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.51) 18%, rgba(255, 255, 255, 0.22) 44%, transparent 44%); /* Lion ref */
+  --osx-pg-bg: linear-gradient(to bottom, #1199f7, #06bafb 52%, #8ed9ff 88%, #a1e4ff); /* Lion ref */
+  --osx-pg-bg-paused: linear-gradient(to bottom, #e0e0e0, #b4b4b4 45%, #9c9c9c 50%, #b2b2b2 85%, #d0d0d0);
+  --osx-pg-bg-error: linear-gradient(to bottom, #f6b6b6, #ec6f6f 45%, #e64b4b 50%, #f06a6a 85%, #f89f9f);
+  --osx-pg-stripes: repeating-linear-gradient(-45deg, transparent 0 8px, rgba(255, 255, 255, 0.55) 8px 16px);
+  /* Lion ref: indeterminate pole, blue stripes on a white push gradient */
+  --osx-pg-pole: repeating-linear-gradient(-45deg, transparent 0 8px, #61b4f5 8px 10px, #17a3f5 10px 14px, #8fd5f8 14px 16px), linear-gradient(to bottom, #fff, #f3f3f3 52%, #ececec 53%, #f2f2f2);
+}
+
+[role="progressbar"] {
+  position: relative;
+  height: var(--osx-pg-h);
+  margin: 4px 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: var(--osx-pg-track);
+  border: 1px solid var(--osx-pg-bd);
+  border-radius: 2px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  > div {
+    height: 100%;
+    background: var(--osx-pg-gloss), var(--osx-pg-bg);
+  }
+
+  &.paused > div {
+    background: var(--osx-pg-gloss), var(--osx-pg-bg-paused);
+  }
+
+  &.error > div {
+    background: var(--osx-pg-gloss), var(--osx-pg-bg-error);
+  }
+
+  /* moving stripes on a determinate bar */
+  &.animate > div {
+    background: var(--osx-pg-gloss), var(--osx-pg-stripes), var(--osx-pg-bg);
+    background-size: auto, 22.6px 22.6px, auto;
+    animation: osx-progressbar-fill 0.8s linear infinite;
+  }
+
+  /* indeterminate: the Aqua barber pole */
+  &.marquee {
+    background: var(--osx-pg-pole);
+    background-size: 22.6px 22.6px, auto;
+    animation: osx-progressbar 0.8s linear infinite;
+
+    > div {
+      display: none;
+    }
+  }
+}
+
+@keyframes osx-progressbar {
+  to {
+    background-position: 22.6px 0, 0 0;
+  }
+}
+
+@keyframes osx-progressbar-fill {
+  to {
+    background-position: 0 0, 22.6px 0, 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where([role="progressbar"]),
+  :where([role="progressbar"]) > div {
+    animation: none;
+  }
+}

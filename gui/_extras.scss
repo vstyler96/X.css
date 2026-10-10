@@ -1,0 +1,342 @@
+/* ---- Lion-only extras ---- */
+
+:root {
+  --osx-sl-bg: linear-gradient(to bottom, #eaedf2, #d3d8df); /* sl = source list */
+  --osx-sl-title-c: hsl(212, 10%, 50%);
+}
+
+/* unified toolbar, sits right under .title-bar */
+.toolbar {
+  font: var(--osx-font);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 8px 8px;
+  line-height: 18px;
+  background: linear-gradient(to bottom, #d9d9d9, #cfcfcf);
+  border-bottom: 1px solid #696969;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  .window.active > &,
+  .title-bar.active + & {
+    background: linear-gradient(to bottom, hsl(0, 0%, 70%), hsl(0, 0%, 59%));
+  }
+
+  > .is-spacer {
+    width: 32px;
+  }
+
+  > .is-flexible {
+    flex: 1;
+  }
+}
+
+/* segmented control: input + label pairs, or plain buttons */
+.segmented {
+  display: inline-flex;
+
+  > input {
+    display: none;
+  }
+
+  > label,
+  > button {
+    font: var(--osx-font);
+    position: relative;
+    display: block;
+    min-width: 0;
+    min-height: 21px;
+    margin: 0;
+    padding: 0 10px;
+    line-height: 19px;
+    text-align: center;
+    background: var(--osx-el-grad);
+    background-clip: padding-box;
+    border: 1px solid var(--osx-el-bd);
+    border-left-width: 0;
+    border-radius: 0;
+    box-shadow: var(--osx-el-sd);
+    animation: none;
+
+    &:first-of-type {
+      border-left-width: 1px;
+      border-radius: var(--osx-el-bdr) 0 0 var(--osx-el-bdr);
+    }
+
+    &:last-of-type {
+      border-radius: 0 var(--osx-el-bdr) var(--osx-el-bdr) 0;
+    }
+
+    /* undo the standalone radio/checkbox decoration */
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+
+  > label:active,
+  > button:active {
+    background: linear-gradient(to bottom, #e0e0e0, #d5d5d5 50%, #cfcfcf 50%, #d5d5d5);
+  }
+
+  /* Lion ref: the selected segment is aqua */
+  > :checked + label,
+  > button[aria-pressed="true"] {
+    background: var(--osx-el-grad-a);
+    background-clip: padding-box;
+    box-shadow: var(--osx-el-sd-a);
+  }
+
+  &.is-textured {
+    > label,
+    > button {
+      color: rgba(0, 0, 0, 0.78);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+      border-color: rgba(0, 0, 0, 0.41);
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    }
+
+    > :checked + label,
+    > button[aria-pressed="true"] {
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(70, 70, 70, 0.3));
+      box-shadow: inset 0 -3px 4px -2px rgba(255, 255, 255, 0.45), inset 0 0 4px 0 rgba(0, 0, 0, 0.5), 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  /* square buttons joined in a bar, e.g. add/remove under a list */
+  &.is-gradient {
+    display: flex;
+    background: linear-gradient(to bottom, hsl(0, 0%, 99%), hsl(0, 0%, 98%) 49%, hsl(0, 0%, 92%) 53%, hsl(0, 0%, 93%));
+    border: 1px solid hsl(0, 0%, 66%);
+
+    > label,
+    > button {
+      min-width: 24px;
+      margin: -1px 0 -1px -1px;
+      padding: 0 8px;
+      background: none;
+      border: 1px solid hsl(0, 0%, 66%);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    > label:active,
+    > button:active {
+      background: linear-gradient(to bottom, hsl(0, 0%, 73%), hsl(0, 0%, 75%) 49%, hsl(0, 0%, 70%) 53%, hsl(0, 0%, 69%));
+    }
+  }
+}
+
+/* scope bar: narrows a search */
+.scope-bar {
+  font: var(--osx-font);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 16px;
+  color: var(--osx-el-c-m);
+  background: linear-gradient(to top, #d9d9d9, #ededed);
+  border-bottom: 1px solid #bfbfbf;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.51);
+
+  > input[type="radio"] {
+    display: none;
+  }
+
+  > label {
+    margin: 0;
+    padding: 0 8px;
+    color: #000;
+    border-radius: 10em;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+
+    &:hover {
+      color: #fff;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+      background: linear-gradient(to bottom, #bbb, #a7a7a7);
+    }
+  }
+
+  > :checked + label,
+  > label:active {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+    background: #9b9b9b;
+    box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(0, 0, 0, 0.12), 0 1px 0 0 rgba(255, 255, 255, 0.45);
+  }
+
+  > label:active {
+    background: #747374;
+  }
+
+  > button,
+  > select {
+    min-width: 16px;
+    min-height: 18px;
+    height: 18px;
+    padding: 0 8px;
+    font-size: 11px;
+    background: var(--osx-rc-grad);
+    border: 1px solid var(--osx-rc-bd);
+    border-radius: 100px;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.45);
+    animation: none;
+
+    &:active {
+      background: linear-gradient(to top, #d2d2d2, #c5c5c5);
+      box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.17), 0 1px 0 0 rgba(255, 255, 255, 0.45);
+    }
+  }
+
+  > select {
+    min-width: 0;
+    padding-right: 18px;
+    background: url("./icon/updown-dark.svg") right 6px center no-repeat, var(--osx-rc-grad);
+  }
+
+  > input:not([type="radio"]) {
+    height: 18px;
+    font-size: 11px;
+    font-weight: normal;
+    border-radius: 0;
+  }
+}
+
+/* split view with a source list (Finder / iTunes sidebar) */
+.splitview {
+  display: flex;
+
+  > :not(.sourcelist) {
+    flex: 1;
+  }
+}
+
+.sourcelist {
+  font: var(--osx-font);
+  min-width: 12em;
+  padding: 2px 0;
+  line-height: 1.84;
+  background: var(--osx-sl-bg);
+  border: 0 solid #bbb;
+
+  &:first-child {
+    border-right-width: 1px;
+  }
+
+  &:last-child {
+    border-left-width: 1px;
+  }
+
+  /* a group is a <details>; its <summary> is the uppercase heading */
+  > details {
+    padding-bottom: 8px;
+
+    > summary {
+      display: block;
+      padding: 0 0 0 8px;
+      font-size: 11px;
+      font-weight: bold;
+      color: var(--osx-sl-title-c);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+
+      &::before {
+        content: none;
+      }
+
+      &:hover::after {
+        content: "Show";
+        position: absolute;
+        top: 0;
+        right: 6px;
+        color: hsla(212, 10%, 50%, 0.7);
+        text-transform: none;
+      }
+
+      &:active::after {
+        color: hsl(215, 60%, 63%);
+      }
+    }
+
+    &[open] > summary:hover::after {
+      content: "Hide";
+    }
+  }
+
+  /* nested folder: a <details> with a disclosure triangle */
+  details details > summary {
+    display: block;
+    padding-left: 1.6em;
+
+    &::before {
+      left: 0.3em;
+    }
+  }
+
+  details details {
+    padding-left: 1.2em;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  label {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0 4px 0 1.6em;
+    border: solid transparent;
+    border-width: 1px 0;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+
+  :checked + label {
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+    background: var(--osx-li-bg-hl);
+    background-clip: padding-box;
+    border-color: var(--osx-li-bd-hl);
+    box-shadow: inset 0 1px 0 hsla(209, 66%, 88%, 0.2);
+  }
+
+  .icon {
+    display: inline-block;
+    position: relative;
+    top: -0.18em;
+    width: 1.5em;
+    text-align: center;
+  }
+
+  .badge {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    margin-top: -7px;
+    padding: 0 6px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 14px;
+    color: #fff;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20em;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+}

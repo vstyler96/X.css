@@ -1,0 +1,19 @@
+/* Aqua asynchronous progress indicator */
+.spinner,
+.loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: transparent;
+  background: url("./icon/spinner.svg") center no-repeat;
+
+  &.animate {
+    animation: osx-spinner 1s steps(12) infinite;
+  }
+}
+
+@keyframes osx-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,40 @@
+/* text field with a push-button arrow (Lion ref) */
+.combobox {
+  position: relative;
+  display: inline-block;
+
+  input[type="text"] {
+    width: 100%;
+    padding-right: 24px;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 19px;
+    width: 19px;
+    min-height: 22px;
+    height: 100%;
+    padding: 0;
+    background: url("./icon/arrow-down.svg") center no-repeat, var(--osx-el-grad);
+    border: 1px solid var(--osx-el-bd);
+    border-radius: 0 3px 3px 0;
+    box-shadow: none;
+    animation: none;
+
+    &:active {
+      background: url("./icon/arrow-down.svg") center no-repeat, var(--osx-el-grad-a);
+      border-color: var(--osx-el-bd-df);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--osx-el-sd-f);
+    }
+
+    &:disabled {
+      background: url("./icon/arrow-down.svg") center no-repeat, var(--osx-el-grad-d);
+      opacity: 0.6;
+    }
+  }
+}

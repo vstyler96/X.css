@@ -1,0 +1,74 @@
+:root {
+  --osx-rd-size: 16px; /* Lion ref */
+  --osx-rdl-space: 6px; /* rdl = radio label */
+  --osx-rd-left: calc(var(--osx-rd-size) + var(--osx-rdl-space));
+  --osx-rdd-size: 6px; /* rdd = radio dot */
+}
+
+/* zero specificity, see _checkbox.scss */
+:where(input[type="radio"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: fixed;
+  margin: 0;
+  background: none;
+  border: none;
+  opacity: 0;
+
+  + label {
+    font: var(--osx-font);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 16px;
+    margin-left: var(--osx-rd-left);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - var(--osx-rd-size) / 2);
+      left: calc(var(--osx-rd-left) * -1);
+      width: var(--osx-rd-size);
+      height: var(--osx-rd-size);
+      box-sizing: border-box;
+      background: var(--osx-el-grad);
+      border: 1px solid var(--osx-el-bd);
+      border-radius: 50%;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 1px 0 #fff;
+    }
+  }
+}
+
+:where(input[type="radio"]:active) + label::before {
+  background: linear-gradient(to bottom, #d5d5d5, #c2c2c2);
+}
+
+:where(input[type="radio"]:checked) + label::before {
+  background: var(--osx-el-grad-a);
+  border-color: var(--osx-el-bd-a);
+}
+
+:where(input[type="radio"]:focus-visible) + label::before {
+  box-shadow: var(--osx-el-sd-f);
+}
+
+:where(input[type="radio"]:checked) + label::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--osx-rdd-size) / 2);
+  left: calc(var(--osx-rd-left) * -1 + (var(--osx-rd-size) - var(--osx-rdd-size)) / 2);
+  width: var(--osx-rdd-size);
+  height: var(--osx-rdd-size);
+  background: #1a1a1a;
+  border-radius: 50%;
+}
+
+:where(input[type="radio"]:disabled) + label {
+  color: var(--osx-el-c-d);
+
+  &::before,
+  &::after {
+    opacity: 0.5;
+  }
+}

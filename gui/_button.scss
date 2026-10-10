@@ -1,0 +1,101 @@
+/* State selectors are wrapped in :where() so every component (title-bar
+   controls, tabs, segmented, ...) can restyle buttons without a specificity fight. */
+button,
+[role="button"],
+input[type="file"]::file-selector-button {
+  font: var(--osx-font);
+  box-sizing: border-box;
+  min-width: 59px;
+  min-height: 21px;
+  padding: 0 14px;
+  color: var(--osx-el-c);
+  text-align: center;
+  text-decoration: none;
+  background: var(--osx-el-grad);
+  background-clip: padding-box;
+  border: 1px solid var(--osx-el-bd);
+  border-radius: var(--osx-el-bdr);
+  box-shadow: var(--osx-el-sd);
+  cursor: default;
+}
+
+button,
+[role="button"] {
+  &:where(:not(:disabled):active, .active),
+  &:where(.default) {
+    background: var(--osx-el-grad-a);
+    background-clip: padding-box;
+    border-color: var(--osx-el-bd-df);
+    box-shadow: var(--osx-el-sd-a);
+  }
+
+  &:where(.default:not(:active)) {
+    animation: osx-pulse 1s infinite ease-in-out;
+  }
+
+  &:where(:focus-visible, .focused) {
+    outline: none;
+    box-shadow: var(--osx-el-sd-f);
+  }
+
+  &:where(:disabled) {
+    color: var(--osx-el-c-d);
+    background: var(--osx-el-grad-d);
+    box-shadow: none;
+    animation: none;
+  }
+
+  /* Lion "Textured Rounded" button (toolbars) */
+  &.is-textured {
+    min-height: 22px;
+    color: rgba(0, 0, 0, 0.78);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+    background: var(--osx-tx-grad);
+    background-clip: padding-box;
+    border-color: var(--osx-tx-bd);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 1px 0 0 rgba(255, 255, 255, 0.3);
+
+    &:where(:not(:disabled):active, .active) {
+      color: rgba(0, 0, 0, 0.92);
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05) 75%, rgba(50, 50, 50, 0.1));
+      border-color: rgba(0, 0, 0, 0.55) rgba(0, 0, 0, 0.41) rgba(0, 0, 0, 0.28) rgba(0, 0, 0, 0.41);
+      box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  /* Lion "Gradient" button (add/remove bars under lists) */
+  &.is-gradient {
+    min-width: 0;
+    padding: 0 8px;
+    border-color: hsl(0, 0%, 66%);
+    border-radius: 0;
+    background: linear-gradient(to bottom, hsl(0, 0%, 99%), hsl(0, 0%, 98%) 49%, hsl(0, 0%, 92%) 53%, hsl(0, 0%, 93%));
+    box-shadow: none;
+
+    &:where(:not(:disabled):active, .active) {
+      border-color: hsl(0, 0%, 57%);
+      background: linear-gradient(to bottom, hsl(0, 0%, 73%), hsl(0, 0%, 75%) 49%, hsl(0, 0%, 70%) 53%, hsl(0, 0%, 69%));
+    }
+  }
+}
+
+label[role="button"] {
+  display: inline-flex;
+  align-items: center;
+
+  > input[type="file"] {
+    display: none;
+  }
+}
+
+@keyframes osx-pulse {
+  50% {
+    filter: brightness(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(button, [role="button"]) {
+    animation: none;
+  }
+}

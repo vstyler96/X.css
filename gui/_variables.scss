@@ -1,0 +1,45 @@
+:root {
+  /* Naming convention:
+   * `--osx-<component>-<property>-<state>`
+   * where:
+   * <component> is the name of the component (el = element, li = list item, etc.)
+   * <property> is the property being defined (bg = background, bd = border, c = color, sd = shadow, etc.)
+   * <state> is the state of the component (d = disabled, h = hovered, a = active, hl = highlighted, f = focused, etc.)
+   */
+
+  --osx-font: 13px "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --osx-font-small: 11px "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --osx-surface: #ededed;
+  --osx-space: 8px;
+
+  --osx-el-bg: #fff;
+  /* values below marked "Lion ref" come from the Lion@4x.svg reference mockup */
+  --osx-el-bd: #8f8f8f; /* Lion ref: #949494 -> #8b8b8b */
+  --osx-el-bd-a: #55588e; /* Lion ref: checked control border #595dae -> #50526e */
+  --osx-el-bd-df: #878899; /* Lion ref: default button border #8e8fa0 -> #808294 */
+  --osx-el-bdr: 4px; /* element border radius */
+
+  --osx-el-c: #000;
+  --osx-el-c-m: #737373; /* muted */
+  --osx-el-c-d: #a0a0a0;
+
+  --osx-el-sd: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  --osx-el-sd-a: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  --osx-el-sd-f: 0 0 0 3px rgba(94, 146, 229, 0.6); /* focus ring */
+  --osx-el-sd-in: inset 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.3); /* sunken field */
+
+  --osx-el-grad: linear-gradient(to bottom, #fff, #f3f3f3 52%, #ececec 53%, #f2f2f2); /* Lion ref */
+  --osx-el-grad-a: linear-gradient(to bottom, #d2e7fb, #a6d0f9 52%, #85c1f9 53%, #b2e0fd); /* Lion ref: aqua */
+  --osx-el-grad-g: linear-gradient(to bottom, #e6e6e6, #cecece 52%, #c2c2c2 53%, #dadada); /* graphite: aqua's stops in grey */
+  --osx-el-c-ph: #939398; /* Lion ref: placeholder */
+  --osx-tx-grad: linear-gradient(to bottom, #f7f7f7, #e6e6e6); /* Lion ref: textured rounded button */
+  --osx-tx-bd: #898989; /* Lion ref */
+  --osx-rc-grad: linear-gradient(to bottom, #f3f2f3, #e6e5e6); /* Lion ref: recessed pill (scope bar) */
+  --osx-rc-bd: #a6a6a6; /* Lion ref: #a8a8a8 -> #a4a4a4 */
+  --osx-el-grad-d: linear-gradient(to bottom, #fafafa, #f2f2f2);
+
+  --osx-li-bg-hl: linear-gradient(to bottom, hsl(209, 66%, 68%), hsl(220, 55%, 58%)); /* selection */
+  --osx-li-bd-hl: hsl(211, 64%, 64%) transparent hsl(214, 45%, 51%) transparent;
+  --osx-li-bg-alt: #f3f6fa; /* zebra row */
+  --osx-mn-bg-hl: linear-gradient(to bottom, #7793f5, #406df2 50%, #275af1); /* menu highlight */
+}

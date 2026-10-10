@@ -1,0 +1,27 @@
+/* Lion pop-up button: a push button with dark up/down arrows (Lion ref) */
+select:not([multiple]) {
+  font: var(--osx-font);
+  box-sizing: border-box;
+  min-width: 10rem;
+  height: 22px;
+  padding: 0 26px 0 8px;
+  color: var(--osx-el-c);
+  background: url("./icon/updown-dark.svg") right 8px center no-repeat, var(--osx-el-grad);
+  border: 1px solid var(--osx-el-bd);
+  border-radius: var(--osx-el-bdr);
+  box-shadow: var(--osx-el-sd);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--osx-el-sd-f);
+  }
+
+  &:disabled {
+    color: var(--osx-el-c-d);
+    background: url("./icon/updown-dark.svg") right 6px center no-repeat, var(--osx-el-grad-d);
+    opacity: 0.8;
+  }
+}

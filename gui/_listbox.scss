@@ -1,0 +1,43 @@
+[role="listbox"],
+select[multiple] {
+  font: var(--osx-font);
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  background: var(--osx-el-bg);
+  border: 1px solid #bbb;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05);
+
+  &.has-shadow {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &.has-hover li:hover {
+    background: var(--osx-li-bg-alt);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--osx-el-sd-f);
+  }
+
+  [role="option"],
+  option {
+    padding: 1px 6px;
+    border: solid transparent;
+    border-width: 1px 0;
+
+    &[aria-selected="true"],
+    &:checked {
+      color: #fff;
+      background: var(--osx-li-bg-hl);
+      background-clip: padding-box;
+      border-color: var(--osx-li-bd-hl);
+    }
+  }
+}

@@ -1,0 +1,132 @@
+:root {
+  /* sdt = slider thumb */
+  --osx-sdt-size: 17px; /* Lion ref */
+  --osx-sdt-bg: var(--osx-el-grad); /* Lion ref */
+  --osx-sdt-bg-a: var(--osx-el-grad-a);
+  --osx-sdt-bd: 1px solid var(--osx-el-bd); /* Lion ref */
+  --osx-sdt-sd: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --osx-sdt-icon: url("./icon/slider-knob.svg");
+  --osx-sdtr-bg: linear-gradient(to bottom, #b0b0b0, #d2d2d2); /* sdtr = slider track, Lion ref */
+  --osx-sdtr-bd: #8b8b8b; /* Lion ref: #707070 -> #a6a6a6 */
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 10px 1px;
+  background: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    box-sizing: border-box;
+    height: 5px;
+    background: var(--osx-sdtr-bg);
+    border: 1px solid var(--osx-sdtr-bd);
+    border-top-color: #707070;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  &::-moz-range-track {
+    box-sizing: border-box;
+    height: 5px;
+    background: var(--osx-sdtr-bg);
+    border: 1px solid var(--osx-sdtr-bd);
+    border-top-color: #707070;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: var(--osx-sdt-size);
+    height: var(--osx-sdt-size);
+    margin-top: -7px;
+    background: var(--osx-sdt-bg);
+    border: var(--osx-sdt-bd);
+    border-radius: 50%;
+    box-shadow: var(--osx-sdt-sd);
+
+    &:active {
+      background: var(--osx-sdt-bg-a);
+    }
+  }
+
+  &::-moz-range-thumb {
+    box-sizing: border-box;
+    width: var(--osx-sdt-size);
+    height: var(--osx-sdt-size);
+    background: var(--osx-sdt-bg);
+    border: var(--osx-sdt-bd);
+    border-radius: 50%;
+    box-shadow: var(--osx-sdt-sd);
+
+    &:active {
+      background: var(--osx-sdt-bg-a);
+    }
+  }
+
+  &:focus-visible::-webkit-slider-thumb {
+    box-shadow: var(--osx-el-sd-f);
+  }
+
+  &:focus-visible::-moz-range-thumb {
+    box-shadow: var(--osx-el-sd-f);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+/* pointed knob, used with tick marks */
+input[type="range"].has-box-indicator {
+  &::-webkit-slider-thumb {
+    width: 16px;
+    height: 20px;
+    margin-top: -6px;
+    background: var(--osx-sdt-icon) no-repeat;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+
+    &:active {
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25)) brightness(0.88);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 20px;
+    background: var(--osx-sdt-icon) no-repeat;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+
+    &:active {
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25)) brightness(0.88);
+    }
+  }
+}
+
+.is-vertical {
+  display: inline-block;
+  width: 4px;
+  height: 150px;
+  transform: translateY(50%);
+
+  > input[type="range"] {
+    width: 150px;
+    height: 4px;
+    margin: 0 16px 0 10px;
+    transform-origin: left;
+    transform: rotate(270deg) translateX(calc(-50% + 8px));
+  }
+}

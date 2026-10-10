@@ -1,0 +1,71 @@
+:root {
+  --osx-tvb-size: 11px; /* tvb = treeview button */
+  --osx-tv-left: 18px;
+}
+
+/* Finder outline view */
+ul.tree-view {
+  font: var(--osx-font);
+  display: block;
+  margin: 0;
+  padding: 6px 6px 6px var(--osx-tv-left);
+
+  li {
+    position: relative;
+    margin-top: 3px;
+    list-style-type: none;
+  }
+
+  a {
+    color: var(--osx-el-c);
+    text-decoration: none;
+
+    &:focus-visible {
+      color: #fff;
+      background: var(--osx-li-bg-hl);
+      box-shadow: none;
+    }
+  }
+
+  ul {
+    margin-top: 3px;
+    padding-left: var(--osx-tv-left);
+  }
+
+  &.has-container {
+    background: var(--osx-el-bg);
+    border: 1px solid #bbb;
+  }
+
+  /* triangle hangs in the gutter so labels line up with leaf items */
+  &.has-collapse-button details > summary {
+    padding-left: 0;
+
+    &::before {
+      left: calc(var(--osx-tvb-size) * -1 - 4px);
+      opacity: 0.6;
+    }
+  }
+
+  &.has-connector ul {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 5px;
+      height: calc(100% - 8px);
+      border-left: 1px solid #c8c8c8;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      right: calc(100% + 3px);
+      width: calc(var(--osx-tv-left) - 8px);
+      border-bottom: 1px solid #c8c8c8;
+    }
+  }
+}

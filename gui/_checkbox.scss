@@ -1,0 +1,73 @@
+:root {
+  --osx-cb-size: 14px;
+  --osx-cbl-space: 6px; /* cbl = checkbox label */
+  --osx-cb-left: calc(var(--osx-cb-size) + var(--osx-cbl-space));
+}
+
+/* :where() keeps these at zero specificity so components (segmented,
+   sourcelist, scope bar) can reuse input + label without undoing them. */
+:where(input[type="checkbox"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: fixed;
+  margin: 0;
+  background: none;
+  border: none;
+  opacity: 0;
+
+  + label {
+    font: var(--osx-font);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 16px;
+    margin-left: var(--osx-cb-left);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - var(--osx-cb-size) / 2);
+      left: calc(var(--osx-cb-left) * -1);
+      width: var(--osx-cb-size);
+      height: var(--osx-cb-size);
+      box-sizing: border-box;
+      background: var(--osx-el-grad);
+      border: 1px solid var(--osx-el-bd);
+      border-radius: 3.5px;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 1px 0 #fff;
+    }
+  }
+}
+
+:where(input[type="checkbox"]:active) + label::before {
+  background: linear-gradient(to bottom, #d5d5d5, #c2c2c2);
+}
+
+:where(input[type="checkbox"]:checked) + label::before {
+  background: var(--osx-el-grad-a);
+  border-color: var(--osx-el-bd-a);
+}
+
+:where(input[type="checkbox"]:focus-visible) + label::before {
+  box-shadow: var(--osx-el-sd-f);
+}
+
+:where(input[type="checkbox"]:checked) + label::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 4px);
+  left: calc(var(--osx-cb-left) * -1 + 2px);
+  width: 10px;
+  height: 10px;
+  background: url("./icon/checkmark.svg") no-repeat;
+}
+
+:where(input[type="checkbox"]:disabled) + label {
+  color: var(--osx-el-c-d);
+
+  &::before,
+  &::after {
+    opacity: 0.5;
+  }
+}

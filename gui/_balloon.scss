@@ -1,0 +1,49 @@
+:root {
+  /* bl = balloon, blt = balloon tail */
+  --osx-bl-bg: #fff;
+  --osx-bl-bg-end: #ececec;
+  --osx-bl-bd: rgba(0, 0, 0, 0.25);
+  --osx-blt-size: 12px;
+  --osx-blt-offset: 1em;
+}
+
+/* Lion popover: rounded, glossy, with a pointed tail */
+[role="tooltip"] {
+  font: var(--osx-font);
+  position: relative;
+  padding: 10px 14px;
+  background: linear-gradient(to bottom, var(--osx-bl-bg), var(--osx-bl-bg-end));
+  border: 1px solid var(--osx-bl-bd);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--osx-blt-size) / -2 - 1px);
+    left: var(--osx-blt-offset);
+    width: var(--osx-blt-size);
+    height: var(--osx-blt-size);
+    background: var(--osx-bl-bg);
+    border: 1px solid var(--osx-bl-bd);
+    border-right: 0;
+    border-bottom: 0;
+    transform: rotate(45deg);
+  }
+
+  &[id] {
+    position: absolute;
+  }
+
+  &.is-top::before {
+    top: auto;
+    bottom: calc(var(--osx-blt-size) / -2 - 1px);
+    background: var(--osx-bl-bg-end);
+    transform: rotate(225deg);
+  }
+
+  &.is-left::before {
+    left: auto;
+    right: var(--osx-blt-offset);
+  }
+}

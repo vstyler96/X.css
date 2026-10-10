@@ -1,0 +1,52 @@
+:root {
+  --osx-link-c: #2a5db0;
+  --osx-link-c-h: #3a77d8;
+  --osx-title-c: #000;
+}
+
+a {
+  color: var(--osx-link-c);
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: none;
+    border-radius: 2px;
+    box-shadow: var(--osx-el-sd-f);
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--osx-link-c-h);
+    text-decoration: underline;
+  }
+}
+
+.instruction {
+  font: var(--osx-font);
+  color: var(--osx-el-c);
+  font-weight: normal;
+  margin: 0 0 20px;
+
+  &-primary {
+    font-weight: bold;
+    color: var(--osx-title-c);
+  }
+}
+
+.header {
+  font: var(--osx-font);
+  font-weight: normal;
+
+  &-document {
+    font-size: 20px;
+    color: var(--osx-el-c);
+  }
+
+  &-group {
+    font: var(--osx-font-small);
+    font-weight: bold;
+    text-transform: uppercase;
+    color: hsl(212, 10%, 50%);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+}

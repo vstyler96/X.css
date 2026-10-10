@@ -1,0 +1,95 @@
+:root {
+  --osx-lvc-size: 4px; /* lvc = listview chevron */
+  --osx-lv-bg-alt: var(--osx-li-bg-alt); /* Finder zebra row */
+  --osx-lv-bg-h: #e4ecf7; /* row hover */
+  --osx-lv-c-h: inherit;
+}
+
+/* Finder list view: gradient headers, zebra rows, blue selection */
+table {
+  font: var(--osx-font);
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: var(--osx-el-bg);
+  border: 1px solid #bbb;
+
+  td,
+  th {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &.has-shadow {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  > thead > tr > * {
+    position: sticky;
+    top: 0;
+    height: 18px;
+    padding: 0 18px 0 6px;
+    box-sizing: border-box;
+    font: var(--osx-font-small);
+    font-weight: normal;
+    background: linear-gradient(to bottom, #fff, #f2f2f2 50%, #e6e6e6 50%, #ededed);
+    border-bottom: 1px solid #b4b4b4;
+    border-right: 1px solid #d0d0d0;
+    cursor: default;
+
+    &.highlighted {
+      background: linear-gradient(to bottom, #d9e5f4, #c0d2ea 50%, #b0c6e5 50%, #c7d9f1);
+    }
+
+    &.indicator::after {
+      content: "";
+      position: absolute;
+      top: calc(50% - var(--osx-lvc-size) / 2);
+      right: 6px;
+      border: var(--osx-lvc-size) solid transparent;
+      border-top-color: #555;
+      border-bottom: 0;
+    }
+
+    &.indicator.up::after {
+      border-top: 0;
+      border-bottom: var(--osx-lvc-size) solid #555;
+    }
+  }
+
+  &.is-full {
+    width: 100%;
+  }
+
+  th.is-center,
+  td.is-center {
+    text-align: center;
+  }
+
+  /* :not(.highlighted) keeps the blue selection on top of zebra and hover */
+  &.is-striped > tbody > tr:nth-child(even):not(.highlighted) {
+    background: var(--osx-lv-bg-alt);
+  }
+
+  &.has-hover > tbody > tr:hover:not(.highlighted) {
+    color: var(--osx-lv-c-h);
+    background: var(--osx-lv-bg-h);
+  }
+
+  > tbody > tr {
+    cursor: default;
+
+    &.highlighted {
+      color: #fff;
+      background: var(--osx-li-bg-hl);
+    }
+
+    > * {
+      height: 18px;
+      padding: 0 6px;
+    }
+  }
+}

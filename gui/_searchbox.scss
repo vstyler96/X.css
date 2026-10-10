@@ -1,0 +1,66 @@
+:root {
+  --osx-s-icon: url("./icon/search.svg");
+}
+
+[type="search"] {
+  font: var(--osx-font);
+  box-sizing: border-box;
+  height: 22px;
+  min-width: 160px;
+  padding: 1px 8px 1px 22px;
+  background: var(--osx-s-icon) no-repeat 7px center, linear-gradient(to top, #fff, hsl(0, 0%, 97%));
+  border: none;
+  border-radius: 100px;
+  box-shadow: var(--osx-el-sd-in);
+  -webkit-appearance: none;
+  appearance: none;
+
+  &::placeholder {
+    color: var(--osx-el-c-ph);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--osx-el-sd-in), var(--osx-el-sd-f);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  /* with a search button, the button is the magnifier on the left of the pill */
+  .searchbox & {
+    width: 100%;
+    background: linear-gradient(to top, #fff, hsl(0, 0%, 97%));
+
+    & + [aria-label="search"] {
+      position: absolute;
+      top: 1px;
+      left: 2px;
+      min-width: 20px;
+      min-height: 20px;
+      padding: 0;
+      background: var(--osx-s-icon) no-repeat center;
+      border: none;
+      border-radius: 50%;
+      box-shadow: none;
+      animation: none;
+
+      &:active {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      &:focus-visible {
+        box-shadow: var(--osx-el-sd-f);
+      }
+    }
+  }
+}
+
+.searchbox {
+  position: relative;
+  display: inline-block;
+}
