@@ -79,6 +79,7 @@ The markup is the same as [7.css](https://github.com/khang-nd/7.css) (and 98.css
 | Slider | `input[type=range]`, `.has-box-indicator`, `.is-vertical` wrapper |
 | Spinner | `.spinner` / `.loader`, `.animate` |
 | Balloon | `[role=tooltip]`, `.is-top`, `.is-left` |
+| Start button | `button.start-button`: the Apple menu, blue while `[aria-expanded="true"]` |
 | Scrollbar | `.has-scrollbar` (opt-in) |
 | Typography | `.instruction`, `.instruction-primary`, `.header-document`, `.header-group` |
 
